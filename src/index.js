@@ -1,21 +1,24 @@
-document.addEventListener("DOMContentLoaded", () => {
-  // your code here
-  const form = document.getElementById("create-task-form");
-  function logSubmit(event) {
-    console.log("submit clicked");
+document.addEventListener("DOMContentLoaded", function () {
+  //DOM nodes
+  const textBox = document.getElementById("new-task-description");
+  const list = document.getElementById("tasks");
+  const formSubmit = document.getElementById("create-task-form");
+  // submit button functionality
+  formSubmit.addEventListener("submit", () => {
     event.preventDefault();
-    createNewToDo();
-    //append list to list id = "task"
-  }
+    console.log("button clicked");
+    addList();
+  });
 
-  function createNewToDo() {
-    console.log("createNewTodo");
-    let node = document.createElement("li");
-    let text = document.getElementById("new-task-description").value;
-    let textNode = document.createTextNode(text);
-    node.appendChild(textNode);
-    document.getElementById("tasks").appendChild(node);
+  function addList() {
+    let li = document.createElement("li");
+    li.innerHTML = textBox.value;
+    let button = document.createElement("button");
+    button.innerHTML = "x";
+    button.addEventListener("click", () => {
+      li.remove();
+    });
+    li.appendChild(button);
+    list.appendChild(li);
   }
-  form.addEventListener("submit", logSubmit);
 });
-//add click eventListener() to CREATE NEW TASK submit btn
